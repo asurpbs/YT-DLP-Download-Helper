@@ -66,7 +66,7 @@ set /p yrd="[7mEnter Video ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --sub-langs "en,si" --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+ba %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+ba %yrl%
 echo.
 title Social Media And MPD URL Downloader
 echo [91mThe operation did successfully.[0m
@@ -133,7 +133,7 @@ set /p yrd="[7mEnter file ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --sub-langs "en,si" --embed-subs --progress --downloader aria2c -P "%UserProfile%/downloads" -f %yrd% %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --downloader aria2c -P "%UserProfile%/downloads" -f %yrd% %yrl%
 echo.
 title TS And M3U8 URL Downloader
 echo [91mThe operation did successfully.[0m
@@ -170,7 +170,7 @@ set /p yrad="[7mEnter Audio ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --sub-langs "en,si" --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+%yrad% %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+%yrad% %yrl%
 echo.
 title Social Media And MPD URL Downloader
 echo [91mThe operation did successfully.[0m
