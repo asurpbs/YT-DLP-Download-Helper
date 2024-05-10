@@ -3,6 +3,7 @@
 set PATH=%PATH%;"%cd%\bin"
 set PATH=%PATH%;"%cd%\bin\ffmpeg-6.1-essentials_build\bin"
 set PATH=%PATH%;"%cd%\bin\Bento4-SDK-1-6-0-640.x86_64-microsoft-win32\bin"
+set DEFAULT_PATH=%UserProfile%/downloads
 title Media Downloader
 :: for deleting last called scripts showing date
 cls
@@ -66,7 +67,7 @@ set /p yrd="[7mEnter Video ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+ba %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%DEFAULT_PATH%" -f %yrd%+ba %yrl%
 echo.
 title Social Media And MPD URL Downloader
 echo [91mThe operation did successfully.[0m
@@ -98,7 +99,7 @@ set /p zpwd="[7mEnter passcode[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" --video-password %zpwd% -f bv+ba %zurl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --merge-output-format mkv --downloader aria2c -P "%DEFAULT_PATH%" --video-password %zpwd% -f bv+ba %zurl%
 echo.
 title Zoom Recorded Video Downloader
 echo [91mThe operation did successfully.[0m
@@ -133,7 +134,7 @@ set /p yrd="[7mEnter file ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --downloader aria2c -P "%UserProfile%/downloads" -f %yrd% %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --downloader aria2c -P "%DEFAULT_PATH%" -f %yrd% %yrl%
 echo.
 title TS And M3U8 URL Downloader
 echo [91mThe operation did successfully.[0m
@@ -170,7 +171,7 @@ set /p yrad="[7mEnter Audio ID[0m "
 echo.
 echo [92mProcess - [0m
 echo.
-yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%UserProfile%/downloads" -f %yrd%+%yrad% %yrl%
+yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --embed-chapters --embed-thumbnail --embed-metadata --xattrs --embed-info-json --write-auto-subs --all-subs --embed-subs --progress --merge-output-format mkv --downloader aria2c -P "%DEFAULT_PATH%" -f %yrd%+%yrad% %yrl%
 echo.
 title Social Media And MPD URL Downloader
 echo [91mThe operation did successfully.[0m
@@ -282,8 +283,8 @@ yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progres
 ffmpeg -hide_banner -decryption_key %kid% -i "%UserProfile%/videos/cdncache/encrypted_video.mp4" -codec copy "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 ffmpeg -hide_banner -decryption_key %hex% -i "%UserProfile%/videos/cdncache/encrypted_audio.m4a" -codec copy "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 ffmpeg -hide_banner -i "%UserProfile%/videos/cdncache/decrypted_video.mp4" -i "%UserProfile%/videos/cdncache/decrypted_audio.m4a" -y -acodec copy -vcodec copy "%UserProfile%/videos/cdncache/output.mp4"
-move %UserProfile%/videos/cdncache/output.mp4 "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/output.mp4" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/output.mp4 "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/output.mp4" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.m4a"
@@ -338,8 +339,8 @@ yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progres
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_video.mp4" "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_audio.m4a" "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 ffmpeg -hide_banner -i "%UserProfile%/videos/cdncache/decrypted_video.mp4" -i "%UserProfile%/videos/cdncache/decrypted_audio.m4a" -y -acodec copy -vcodec copy "%UserProfile%/videos/cdncache/output.mp4"
-move %UserProfile%/videos/cdncache/output.mp4 "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/output.mp4" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/output.mp4 "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/output.mp4" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.m4a"
@@ -395,8 +396,8 @@ yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progres
 ffmpeg -hide_banner -decryption_key %kid% -i "%UserProfile%/videos/cdncache/encrypted_video.mp4" -codec copy "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 ffmpeg -hide_banner -decryption_key %hex% -i "%UserProfile%/videos/cdncache/encrypted_audio.mp4" -codec copy "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 ffmpeg -hide_banner -i "%UserProfile%/videos/cdncache/decrypted_video.mp4" -i "%UserProfile%/videos/cdncache/decrypted_audio.m4a" -y -acodec copy -vcodec copy "%UserProfile%/videos/cdncache/output.mp4"
-move %UserProfile%/videos/cdncache/output.mp4 "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/output.mp4" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/output.mp4 "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/output.mp4" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.mp4"
@@ -452,8 +453,8 @@ yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progres
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_video.mp4" "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_audio.mp4" "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 ffmpeg -hide_banner -i "%UserProfile%/videos/cdncache/decrypted_video.mp4" -i "%UserProfile%/videos/cdncache/decrypted_audio.m4a" -y -acodec copy -vcodec copy "%UserProfile%/videos/cdncache/output.mp4"
-move %UserProfile%/videos/cdncache/output.mp4 "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/output.mp4" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/output.mp4 "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/output.mp4" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_video.mp4"
 del /f "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.mp4"
@@ -503,8 +504,8 @@ echo [92mProcess - [0m
 echo.
 yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --progress --downloader aria2c --no-check-certificate -o "%UserProfile%/videos/cdncache/encrypted_audio.m4a" -f %ad% %mpd%
 ffmpeg -hide_banner -decryption_key %hex% -i "%UserProfile%/videos/cdncache/encrypted_audio.m4a" -codec copy "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
-move %UserProfile%/videos/cdncache/decrypted_audio.m4a" "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/decrypted_audio.m4a" "%UserProfile%/downloads/%name%.m4a"
+move %UserProfile%/videos/cdncache/decrypted_audio.m4a" "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/decrypted_audio.m4a" "%DEFAULT_PATH%/%name%.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.m4a"
 title Protected only Audio file download (not cenc)
 echo.
@@ -551,8 +552,8 @@ echo [92mProcess - [0m
 echo.
 yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --progress --downloader aria2c --no-check-certificate -o "%UserProfile%/videos/cdncache/encrypted_audio.m4a" -f %ad% %mpd%
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_audio.m4a" "%UserProfile%/videos/cdncache/decrypted_audio.m4a"
-move %UserProfile%/videos/cdncache/decrypted_audio.m4a" "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/decrypted_audio.m4a" "%UserProfile%/downloads/%name%.m4a"
+move %UserProfile%/videos/cdncache/decrypted_audio.m4a" "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/decrypted_audio.m4a" "%DEFAULT_PATH%/%name%.m4a"
 del /f "%UserProfile%/videos/cdncache/encrypted_audio.m4a"
 title Protected only Audio file download (cenc)
 echo.
@@ -599,8 +600,8 @@ echo [92mProcess - [0m
 echo.
 yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --progress --downloader aria2c --no-check-certificate -o "%UserProfile%/videos/cdncache/encrypted_video.mp4" -f %ad% %mpd%
 ffmpeg -hide_banner -decryption_key %hex% -i "%UserProfile%/videos/cdncache/encrypted_video.mp4" -codec copy "%UserProfile%/videos/cdncache/decrypted_video.mp4"
-move %UserProfile%/videos/cdncache/decrypted_video.mp4" "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/decrypted_video.m4a" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/decrypted_video.mp4" "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/decrypted_video.m4a" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/encrypted_video.mp4"
 title Protected only video download (not cenc)
 echo.
@@ -647,8 +648,8 @@ echo [92mProcess - [0m
 echo.
 yt-dlp --console-title --progress-template "download-title:%(info.id)s-%(progress.eta)s" --progress --downloader aria2c --no-check-certificate -o "%UserProfile%/videos/cdncache/encrypted_video.mp4" -f %ad% %mpd%
 mp4decrypt --key %kid%:%hex% "%UserProfile%/videos/cdncache/encrypted_video.mp4" "%UserProfile%/videos/cdncache/decrypted_video.mp4"
-move %UserProfile%/videos/cdncache/decrypted_video.mp4" "%UserProfile%/downloads"
-ren "%UserProfile%/downloads/decrypted_video.mp4" "%UserProfile%/downloads/%name%.mp4"
+move %UserProfile%/videos/cdncache/decrypted_video.mp4" "%DEFAULT_PATH%"
+ren "%DEFAULT_PATH%/decrypted_video.mp4" "%DEFAULT_PATH%/%name%.mp4"
 del /f "%UserProfile%/videos/cdncache/encrypted_video.mp4"
 title Protected only Audio file download (cenc)
 echo.
